@@ -1,0 +1,14 @@
+0.43972970094553465
+java
+java framework
+do you know any java framework?
+hard
+60
+0.7235824277203247
+python
+python framework
+what is your favourite python framework?
+easy
+20
+87
+{'id': 0.7705887772076824, 'subject': 'Javascript', 'topic': 'Javascript frameworks', 'text': 'What is you favourite javascript framework?', 'difficulty': 'medium', 'marks': '87'}

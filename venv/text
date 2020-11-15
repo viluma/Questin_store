@@ -1,0 +1,154 @@
+#!/usr/bin/python
+import random
+
+class Node:
+
+    def __init__(self, id, text, subject, topic, difficulty, marks):
+        self.id = id
+        self.text = text
+        self.subject = subject
+        self.topic = topic
+        self.difficulty = difficulty
+        self.marks = marks
+        self.next = None
+
+#Question_store class contain function to create, delete and update question.
+class QuestionStore:
+    #setting the first question on the linkedlist to none
+    def __init__(self):
+        self.head = None
+
+    #all subject function list all the question subjects
+    def all_subjects(self):
+
+        if self.head is None:
+            print("List has no element")
+            return
+        else:
+            n = self.head
+            while n:
+                question={"Subject":n.subject,"Topic":n.topic, "Text":n.text,"difficult":n.difficulty,
+                      "Marks":n.marks}
+                print(n.subject , " ")
+                n = n.next
+
+    #print_question function prints all question atributes.
+    def print_question(self):
+        cur_node = self.head
+
+        while cur_node:
+
+            question={"id":cur_node.id, "Subject":cur_node.subject,"Topic":cur_node.topic, "Text":cur_node.text,"difficult":cur_node.difficulty,
+                      "Marks":cur_node.marks}
+            print(question)
+            cur_node = cur_node.next
+
+     #create_question is a function that creates new question.
+    def create_question(self):
+        nums = int(input("How many nodes do you want to create: "))
+        if nums == 0:
+            return
+        for i in range(nums):
+            f=open('f1.txt','a+')
+            id=random.random()
+            f.write(str(id)+'\n')
+            subject = input('add new question \n Enter the subject')
+            print(subject)
+            f.write(subject+'\n')
+
+            topic = input('Enter the question topic:')
+            print(topic)
+            f.write(topic+'\n')
+
+            text = input('Enter the question text:')
+            print(text)
+            f.write(text+'\n')
+
+            difficulty = input('how difficult the question is,choose between easy, medium or hard')
+            print(difficulty)
+            f.write(difficulty+'\n')
+
+            marks = input('Enter the mark:')
+            print(marks)
+            f.write(marks+'\n')
+
+
+            self.append(id, text, subject, topic, difficulty, marks)
+            f.close()
+
+    #append function add new question to the final of the list, this function its called in the create_question().
+    def append(self,id, text, subject, topic, difficulty, marks):
+
+        new_node = Node(id,text, subject, topic, difficulty, marks)
+
+        if self.head is None:
+            self.head = new_node
+            return
+
+        last_node = self.head
+        while last_node.next:
+            last_node = last_node.next
+        last_node.next = new_node
+
+     # delete_question is function responsible to delete question inside the question_store.
+    def delete_question(self, x):
+        if self.head is None:
+            print("The list has no element to delete")
+            return
+           # Deleting first node
+        if self.head.id == x:
+           self.head = self.head.next
+           return
+
+        n = self.head
+        while n.next is not None:
+            if n.next.id == x:
+                break
+            n = n.next
+
+        if n.next is None:
+            print("item not found in the list")
+        else:
+            n.next = n.next.next
+
+     #update_question updates the question inside a question_store it finds the id and them make the changes.
+    def update_question(self, x):
+        if self.head is None:
+            print("List has no elements")
+            return
+        n = self.head
+        while n is not None:
+            f=open('f1.txt','w')
+            for i in f:
+                if n.id == x:
+
+                    n.subject = input('Update the question\n Enter the subject')
+                    print(n.subject)
+
+                    n.topic = input('Enter the question topic:')
+                    print(n.topic)
+
+                    n.text = input('Enter the question text:')
+                    print(n.text)
+
+                    n.difficulty = input('how difficult the question is,choose between easy, medium or hard')
+                    print(n.difficulty)
+
+                    n.marks = input('Enter the mark:')
+                    print(n.marks)
+
+
+                    print("Question updated")
+                    return True
+                n = n.next
+        print("Question not found")
+        return False
+
+
+
+
+#creating question_store object
+question_store = QuestionStore()
+
+question_store.print_question()
+
