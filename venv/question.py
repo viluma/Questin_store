@@ -61,3 +61,4 @@ question_store.create_question()
 #print all the questions inside the question store
 question_store.print_question()
 
+#The questions are saved in f1.text file
